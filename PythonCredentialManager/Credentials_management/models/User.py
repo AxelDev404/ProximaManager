@@ -1,6 +1,6 @@
 
 class User:
-   def __init__(self , username, password, name, email, numberPhone):
+   def __init__(self , username, password, name, email, numberphone):
 
      if username == "":
         print("[ Name can't be empty ]")
@@ -22,10 +22,10 @@ class User:
      else:
         self.__email = email
 
-     if len(numberPhone) < 10:
+     if len(numberphone) < 10:
          print("[ Number phone must be more or equal to 10 numbers ]")
      else:
-        self.__numberPhone = numberPhone
+        self.__numberphone = numberphone
 
    #Getters
 
@@ -46,8 +46,8 @@ class User:
       return self.__email
    
    @property
-   def numberPhone(self):
-      return self.__numberPhone
+   def numberphone(self):
+      return self.__numberphone
    
    #Setters
 
@@ -72,10 +72,10 @@ class User:
      else:
         self.__email = email
 
-   @numberPhone.setter
-   def numberPhone(self, numberPhone):
-     if len(numberPhone)<10:
+   @numberphone.setter
+   def numberphone(self, numberphone):
+     if len(numberphone)<12:
          print("[ Invalid phone number ]")
      else:
-         self.__numberPhone = numberPhone
+         self.__numberphone = numberphone
 
