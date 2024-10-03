@@ -2,22 +2,21 @@
 from termcolor import colored
 from colorama import Style ,Fore
 import pwinput 
-
 import os
 import time
-
 from Menu.MenuManagement import MenuManagement
 from DataBaseManagement import UserManager
 from models.User import  User
 from models.Register import Register
 
 def main():
+    os.system('cls')
 
     usrManager = UserManager()
     menuManagement = MenuManagement()
     
     loop = True
-    
+
     while loop:
         os.system('cls')
         menuManagement.exportMenuPrincipal()
@@ -77,7 +76,7 @@ def main():
 
             register = Register()
             
-            register.registration()
+            register.registrationUSER()
 
             enter = input(Style.BRIGHT+colored("Press enter to exit : ","green"))
 

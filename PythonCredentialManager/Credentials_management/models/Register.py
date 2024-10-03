@@ -9,7 +9,7 @@ from models.User import  User
 
 class Register:
 
-    def registration(self):
+    def registrationUSER(self):
         usrManager = UserManager()
 
         loopRegistration = True      
@@ -89,3 +89,7 @@ class Register:
             print()
         else:
             usrManager.registerUser(userClass)
+
+    
+    def registerCredentials():
+        print()

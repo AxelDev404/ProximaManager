@@ -6,29 +6,23 @@ from termcolor import colored
 import time
 import os
 
-
 class UserManager:
 
-    def connect_db():
+    def connect_db(self):
         return mysql.connector.connect(
            host= "localhost",
            user= "rootALEX",
            password = "root2234A03",
-           database = "credentials_management"
-       )
+           database = "credentials_management")
        
 
     def logIn(self, username,password):
 
-       db = mysql.connector.connect(
-           host= "localhost",
-           user= "rootALEX",
-           password = "root2234A03",
-           database = "credentials_management"
-       )
+      #prova dinamico ovvero chiedi all utente di collegrsi al host senza farlo da codice user e pwd // metdo con query per fare il db personale senza farlo da sql alleggerire l utente
 
+       db = self.connect_db()
        cursor = db.cursor()
-
+        
        sql_query = 'SELECT id_user FROM user WHERE username = %s AND pwd = %s'
        cursor.execute(sql_query,(username,password))
 
@@ -47,27 +41,20 @@ class UserManager:
        
     
     def profile(self, username,password):
-       controll = False
+       
+       db = self.connect_db()
+       cursor = db.cursor()
 
-       dataBase = mysql.connector.connect(
-           host= "localhost",
-           user= "rootALEX",
-           password = "root2234A03",
-           database = "credentials_management"
-       )
-
-       cursor = dataBase.cursor()
+       cursor = db.cursor()
 
        sql_query = 'SELECT id_user , nome , username , email , number_phone  FROM user WHERE username = %s AND pwd = %s'
        cursor.execute(sql_query,(username,password))
 
        usr = cursor.fetchone()
-       dataBase.close()
+       db.close()
        cursor.close()
 
        if usr:  
-           controll = True
-
            id_user = usr[0]
            name = usr[1]
            username_db = usr[2]
@@ -83,44 +70,26 @@ class UserManager:
         
         values = (userClass.username , userClass.password , userClass.name , userClass.email , userClass.numberphone)
 
-        dataBase = mysql.connector.connect(
-            host ="localhost",
-            user = "rootALEX",
-            password = "root2234A03",
-            database = "credentials_management"
-        )
+        db = self.connect_db()
+        cursor = db.cursor()
 
-        #try:
-        cursor = dataBase.cursor()
+        
         sql_query = "INSERT INTO user (username , pwd , nome , email , number_Phone) VALUES (%s , %s , %s , %s , %s)"
 
         cursor.execute(sql_query, (values))
-        dataBase.commit() #to push in db
+        db.commit() #to push in db
 
         print("Registartion complete! Welcome in Credentials Manager")  
         time.sleep(1.3)
-
-        #except mysql.connector.Error as err :
-        #    print("SQL error!")
-        #    time.sleep(1.3)
-
-       # finally:
-        #    cursor.close()
-        #    dataBase.close()
 
 
     def checkUserExistance(self, username , email):
 
         controllCheckUser = False
+        db = self.connect_db()
+        cursor = db.cursor()
 
-        dataBase = mysql.connector.connect(
-            host ="localhost",
-            user = "rootALEX",
-            password = "root2234A03",
-            database = "credentials_management"
-        )
-
-        cursor = dataBase.cursor()
+        cursor = db.cursor()
             
         sql_query = "SELECT username , email FROM user WHERE username = %s OR email = %s"
         cursor.execute(sql_query , (username,email))
@@ -128,7 +97,7 @@ class UserManager:
         usr = cursor.fetchone()
 
         cursor.close()
-        dataBase.close()
+        db.close()
 
         if usr:
             controllCheckUser = True
@@ -140,42 +109,28 @@ class UserManager:
             
      
     def getUsername(self, username,password): #do get id method
-        controll = False
 
-        dataBase = mysql.connector.connect(
-            host ="localhost",
-            user = "rootALEX",
-            password = "root2234A03",
-            database = "credentials_management"
-        )
+        db = self.connect_db()
+        cursor = db.cursor()
 
         sql_query = 'SELECT username  FROM user WHERE username = %s AND pwd = %s'
 
-        cursor = dataBase.cursor()
         cursor.execute(sql_query,(username , password))
 
         usr = cursor.fetchone()
 
         cursor.close()
-        dataBase.close()
+        db.close()
 
         if usr:
-            controll = True
-
             usern = usr[0]
             return usern
 
 
     def getId(self,username , password):
 
-        dataBase = mysql.connector.connect(
-            host = "localhost",
-            user = "rootALEX",
-            password = "root2234A03",
-            database = "credentials_management"
-        )    
-
-        cursor = dataBase.cursor()
+        db = self.connect_db()
+        cursor = db.cursor()   
 
         sql_query = "SELECT id_user FROM user WHERE username = %s AND pwd = %s"
 
