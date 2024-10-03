@@ -5,7 +5,9 @@ from termcolor import colored
 from colorama import Style ,Fore
 
 from DataBaseManagement import UserManager
+from DataBaseManagement import CredentialManager
 from models.User import  User
+from models.Credential import Credentials
 
 class Register:
 
@@ -91,5 +93,76 @@ class Register:
             usrManager.registerUser(userClass)
 
     
-    def registerCredentials():
+    def registerCredentials(self):
         print()
+
+        loop = True
+
+        while loop:
+
+            email = input(colored("Email : " , "green"))
+            os.system('cls')
+
+            if email == "":
+                print(colored("[ Email can,t be empty ]", "red"))
+                time.sleep(1.3)
+                os.system("cls")
+            else:
+                loop = False
+        
+        loop = True
+
+        while loop:
+
+            username = input(colored("Username : " , "green"))
+            os.system('cls')
+
+            if username == "":
+                print(Style.BRIGHT+colored("[ ADVISE (Empty Value) : Username can be added leater in < Settings-credentials > ]" , "yellow"))
+                time.sleep(3.3)
+                os.system("cls")
+                loop = False
+
+        loop = True
+
+        while loop:
+
+            password = input(colored("Password : " , "green"))
+            os.system('cls')
+
+            if password == "":
+                print(colored("[ Password can't be empty ]" , "red"))
+                time.sleep(1.1)
+                os.system("cls")
+            else:
+                loop = False
+
+        loop = True
+
+        while loop:
+
+            product = input(colored("Service : " , "green"))
+            os.system('cls')
+
+            if product == "":
+                print(colored("[ Product can't be empty ]" , "red"))
+                time.sleep(1.1)
+                os.system("cls")
+            else:
+                loop = False
+
+
+        credentials = Credentials(password , username , email , product)
+
+        credentialsManager = CredentialManager()
+        userManager = UserManager()
+        userManager.getId()
+
+        credentialsManager.addCredentials(credentials , userManager.getId())
+        
+
+
+            
+
+            
+
