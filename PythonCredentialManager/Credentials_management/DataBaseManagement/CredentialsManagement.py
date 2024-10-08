@@ -1,6 +1,7 @@
 import mysql.connector
 from termcolor import colored
-
+from colorama import Style ,Fore
+from prettytable import PrettyTable
 class CredentialManager:
     
     def conncet_db(self):
@@ -29,6 +30,7 @@ class CredentialManager:
         print("Registartion complete!") 
 
     def noFilterSearch(self , id_user_credentials):
+        prettytab = PrettyTable()
 
         sql_query = "SELECT id_credential , email , username, pwd , product FROM credentials WHERE id_user_credentials = %s"
 
@@ -37,17 +39,123 @@ class CredentialManager:
 
         cursor.execute(sql_query , (id_user_credentials,)) #virgola
 
-        credentials = cursor.fetchone()
-
+        credentials = cursor.fetchall()
+        
+        columns = [colored(desc[0],"red") for desc in cursor.description]
+        prettytab.field_names = columns
+        
         if credentials:
-            id_credential = credentials[0]
-            email = credentials[1]
-            username = credentials[2]
-            pwd = credentials[3]
-            product = credentials[4]
+           for row in credentials:
+               rowColored = [colored(x , 'light_green') for x in row]
+               prettytab.add_row(rowColored)
 
-            return colored(f"_______________________\n|\n| ID CREDENTIAL : {id_credential} \n|\n| EMAIL : {email} \n|\n| USERNAME : {username} \n|\n| PASSWORD : {pwd} \n|\n| PRODUCT : {product} \n|\n|_______________________\n","light_cyan")
+           print(prettytab,Fore.GREEN)
         else:
             print("FATAL ERROR : no user was found!")
 
+
+    def idFilterSearch(self , id_user_credentials , id_credential):
+            
+        prettytab = PrettyTable()
+
+        sql_query = "SELECT email , username , pwd , product FROM credentials WHERE id_user_credentials = %s AND id_credential = %s"
+
+        db = self.conncet_db()
+
+        cursor = db.cursor()
+
+        cursor.execute(sql_query , (id_user_credentials , id_credential))
+
+        credentials = cursor.fetchall()
+        columns = [colored(desc[0],'red') for desc in cursor.description]
+        prettytab.field_names = columns
+            
+        if credentials:
+
+            for row in credentials:
+                rowColored = [colored(x , 'light_green') for x in row]
+                prettytab.add_row(rowColored)
+
+            print(prettytab , Fore.GREEN)
+        else:
+            print(colored("no credentials was found for this id!" , "light_red"))
+        
+
+    def usernameFilterSearch(self ,id_user_credentials , username):
+        prettyTable = PrettyTable()
+
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "SELECT email , username , pwd , product FROM credentials WHERE id_user_credentials = %s AND username = %s"
+
+        cursor.execute(sql_query , (id_user_credentials , username))
+        credentials = cursor.fetchall()
+
+        columns = [colored(desc[0],"red") for desc in cursor.description]
+
+        prettyTable.field_names = columns
+
+        if credentials:
+
+            for row in credentials:
+                rowColored = [colored(x , "light_green") for x in row]
+                prettyTable.add_row(rowColored)
+
+            print(prettyTable , Fore.GREEN)
+        else: 
+            print(colored("no credentials was found for this username!","red"))
+    
+    def emailFilterSearch(self, id_credentials_user , email):
+        prettyTable = PrettyTable()
+
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "SELECT email , username , pwd , product FROM credentials WHERE id_user_credentials = %s AND email = %s"
+        cursor.execute(sql_query , (id_credentials_user , email))
+
+        credetials = cursor.fetchall() 
+
+        columns =[colored(desc[0] , "red") for desc in cursor.description]
+        prettyTable.field_names = columns
+
+        if credetials:
+            for row in credetials:
+                rowColored = [colored(x , "light_green") for x in row]
+                prettyTable.add_row(rowColored)
+
+            print(prettyTable , Fore.GREEN)  
+        else:
+            print(colored("no credentials was found for this email!","red"))
+
+    def productFilterSeacrh(self , id_user_credentials , product):
+        prettyTable = PrettyTable()
+
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "SELECT email , username , pwd , product FROM credentials WHERE id_user_credentials = %s AND product = %s"
+        cursor.execute(sql_query , (id_user_credentials , product))
+
+        credentials = cursor.fetchall()
+
+        columns = [colored(desc[0] , "red") for desc in cursor.description]
+        prettyTable.field_names = columns
+
+        if credentials:
+            for row in credentials:
+                rowColored = [colored(x , "light_green") for x in row]
+                prettyTable.add_row(rowColored)
+
+            print(prettyTable , Fore.GREEN)
+        else:
+            print(colored("no credentials was found for this service!" , "red"))
+
+    def deleteRow(self , id_user_credentials , id_credential):
+        
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "ALTER"
         
