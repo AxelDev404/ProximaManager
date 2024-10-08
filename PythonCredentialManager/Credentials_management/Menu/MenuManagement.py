@@ -18,7 +18,6 @@ class MenuManagement:
         print(colored("+","green")+colored("_________________________________","red")+colored("+","green"))
         print()
 
-
     def exportUserMenu(self):
         print(colored("+","green")+colored("__________________________________","red")+colored("+","green"))
         print(colored("|                                 |","red"))
@@ -39,7 +38,6 @@ class MenuManagement:
         print(colored("+","green")+colored("_________________________________","red")+colored("+","green"))
         print()
 
-
     def exportSerchMenu(self):
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         print(colored("|                                    |","red"))
@@ -57,17 +55,20 @@ class MenuManagement:
         print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Quit ]                    ","green")+colored("  |","red"))
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
 
-
     def exportManagerMenuCredentials(self):
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         print(colored("|                                    |","red"))
-        print(colored("|         ","red")+Style.BRIGHT+colored("< MANAGE MENU >" , "red")+colored("          |","red"))
+        print(colored("|           ","red")+Style.BRIGHT+colored("< MANAGE MENU >" , "red")+colored("          |","red"))
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         print(colored("|                                    |","red"))
         print(colored("| ","red")+Style.BRIGHT+colored(" [1] [ Delete credential ]       ","green")+colored("  |","red"))
         print(colored("|                                    |","red"))
-        print(colored("| ","red")+Style.BRIGHT+colored(" [2] [ Modify credential ]       ","green")+colored("  |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [2] [ Modify password ]         ","green")+colored("  |","red"))
         print(colored("|                                    |","red"))
-        print(colored("| ","red")+Style.BRIGHT+colored(" [3] [ Quit ]                    ","green")+colored("  |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [3] [ Modify email ]            ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [4] [ Modify username ]         ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Quit ]                    ","green")+colored("  |","red"))
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         

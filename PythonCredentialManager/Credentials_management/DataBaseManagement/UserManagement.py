@@ -1,4 +1,4 @@
-
+from prettytable import PrettyTable
 import mysql.connector 
 from mysql.connector import Error
 from colorama import Style ,Fore
@@ -41,27 +41,25 @@ class UserManager:
        
     
     def profile(self, username,password):
-       
-       db = self.connect_db()
-       cursor = db.cursor()
+       prettyTable = PrettyTable()
 
+       db = self.connect_db()
        cursor = db.cursor()
 
        sql_query = 'SELECT id_user , nome , username , email , number_phone  FROM user WHERE username = %s AND pwd = %s'
        cursor.execute(sql_query,(username,password))
+       
+       usr = cursor.fetchall()
 
-       usr = cursor.fetchone()
-       db.close()
-       cursor.close()
+       column = [colored(desc[0] , "red") for desc in cursor.description]
+       prettyTable.field_names = column
 
        if usr:  
-           id_user = usr[0]
-           name = usr[1]
-           username_db = usr[2]
-           email = usr[3]
-           numberPhone = usr[4]
+            for row in usr:
+             rowColored = [colored(x , "light_green") for x in row]
+             prettyTable.add_row(rowColored)
 
-           return f"\n\n| ID : {id_user} \n|\n| NAME : {name} \n|\n| USERNAME : {username_db} \n|\n| EMAIL : {email} \n|\n| PHONE : {numberPhone} \n\n"
+            print(prettyTable ,  Fore.GREEN)   
        else:
            print(colored("Failed LogIn : invalid credentials","red"))
 

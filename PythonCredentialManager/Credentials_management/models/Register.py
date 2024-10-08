@@ -21,7 +21,7 @@ class Register:
             os.system("cls")
             if usrName == "":
                 print(colored("[ Username can't be empty]" , "red"))
-                time.sleep(1.3)
+                time.sleep(4.3)
                 os.system("cls")
             else:
                 loopRegistration = False
@@ -36,7 +36,7 @@ class Register:
 
             if len(pwd) < 8:
                 print(colored("[ Password can't be empty and it must be more or equal to 8 characters ]","red"))
-                time.sleep(1.3)
+                time.sleep(5.3)
                 os.system("cls")
             else:
                 loopRegistration = False
@@ -51,7 +51,7 @@ class Register:
 
             if name == "":
                 print(colored("[ Name can't be empty ]", "red"))
-                time.sleep(1.3)
+                time.sleep(4.3)
                 os.system("cls")
             else:
                 loopRegistration = False
@@ -65,7 +65,7 @@ class Register:
             os.system("cls")
             if email == "":
                 print(colored("[ Email can,t be empty ]", "red"))
-                time.sleep(1.3)
+                time.sleep(4.3)
                 os.system("cls")
             else:
                 loopRegistration = False
@@ -79,7 +79,7 @@ class Register:
             os.system("cls")
             if len(numberPhone) < 10 : 
                 print(colored("[ Invalid number phone ]", "red"))
-                time.sleep(1.3)
+                time.sleep(4.3)
                 os.system("cls")
             else:
                 loopRegistration = False

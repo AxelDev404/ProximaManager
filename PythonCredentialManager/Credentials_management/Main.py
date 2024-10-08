@@ -13,7 +13,7 @@ from models.Register import Register
 
 def main():
     os.system('cls')
-
+    
     usrManager = UserManager()
     crdManager = CredentialManager()
 
@@ -21,6 +21,8 @@ def main():
     register = Register()
 
     loop = True
+
+    #PROXIMA SECURITY MANAGER TITOLO PROGETTO
 
     while loop:
         os.system('cls')
@@ -45,6 +47,8 @@ def main():
             counterAlert = 0
 
             while usrManager.logIn(username , password) and loopUser:
+                
+                usrManager.getId(username , password)
 
                 if counterAlert < 1:
                     print(colored("Sucessfull logIn","green"))
@@ -68,7 +72,7 @@ def main():
                                                                                                   
                     os.system('cls')
 
-                    print(usrManager.profile(username,password))
+                    usrManager.profile(username,password)
                     enter = input("Press enter to quit :")
 
                     counterAlert+=1
@@ -100,7 +104,7 @@ def main():
                         os.system('cls')
                         if usernameCredentials == "" or not(usernameCredentials == ""):
                             print(Style.BRIGHT+colored("[ ADVISE : Username can be olso added leater in < Settings-credentials > ]" , "yellow"))
-                            time.sleep(3.3)
+                            time.sleep(5.3)
                             os.system("cls")
                             loop = False
                     loop = True
@@ -146,7 +150,7 @@ def main():
 
                     crdManager.noFilterSearch(usrManager.getId(username , password))
                     print()
-                    print("Press enter to quit")
+                    print(colored("Press enter to quit" , "green"))
                     print()
                     selectionUser = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
 
@@ -183,7 +187,7 @@ def main():
                                 except ValueError:
                                     print(colored("Invalid value!","red")) 
 
-                                    time.sleep(1.1)
+                                    time.sleep(2.1)
                                     os.system('cls')
 
                             crdManager.idFilterSearch(usrManager.getId(username , password) , id_credential)
@@ -247,23 +251,134 @@ def main():
                             os.system('cls')
 
 
-
                 elif selectionUser == "5":
+                    # _____              _            _   _       _      ___  ___                                  
+                    #/  __ \            | |          | | (_)     | |     |  \/  |                                  
+                    #| /  \/_ __ ___  __| | ___ _ __ | |_ _  __ _| |___  | .  . | __ _ _ __   __ _  __ _  ___ _ __ 
+                    #| |   | '__/ _ \/ _` |/ _ \ '_ \| __| |/ _` | / __| | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
+                    #| \__/\ | |  __/ (_| |  __/ | | | |_| | (_| | \__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
+                    # \____/_|  \___|\__,_|\___|_| |_|\__|_|\__,_|_|___/ \_|  |_/\__,_|_| |_|\__,_|\__, |\___|_|   
+                    #                                                                               __/ |          
+                    #                                                                              |___/                                                                         
+
+                    os.system('cls')
                     loopManagerMenuCredentials = True
 
                     while loopManagerMenuCredentials:
+                        os.system('cls')    
 
                         menuManagement.exportManagerMenuCredentials()
 
                         managerMenu = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
 
                         if managerMenu == "1":
-                            print()
-                    
-                        
-                    loopUser = False
+                            os.system('cls')
 
-                elif selectionUser == "":
+                            loopIntCheck = True
+                            while loopIntCheck:
+                                try:
+                                    print(colored("Insert the credential id : ","green"))
+                                    print()
+                                    idToDelete = int(input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green")))
+                                    loopIntCheck = False
+                                    os.system('cls')
+                                except ValueError:
+                                    print(colored("Invalid value!","red")) 
+                                    time.sleep(1.1)
+                                    os.system('cls')
+
+                            crdManager.deleteRow(usrManager.getId(username,password) , idToDelete)
+
+                        elif managerMenu == "2":
+                            os.system('cls')
+
+                            loopIntCheck = True
+                            while loopIntCheck:
+                                try:
+                                    print(colored("Insert the credential id : ","green"))
+                                    print()
+                                    idToUpdate = int(input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green")))
+                                    loopIntCheck = False
+                                    os.system('cls')
+                                except ValueError:
+                                    print(colored("Invalid value!","red")) 
+                                    time.sleep(1.1)
+                                    os.system('cls')
+
+                            print()
+                            print(colored("Insert the new password : ","green"))
+                            print()
+
+                            updatePassword = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                            
+                            crdManager.updatePassword(usrManager.getId(username,password) , idToUpdate , updatePassword)
+                            time.sleep(4.2)
+                        
+                        elif managerMenu == "3":
+                            os.system('cls')
+
+                            loopIntCheck = True
+                            while loopIntCheck:
+                                try:
+                                    print(colored("Insert the credential id : ","green"))
+                                    print()
+                                    idToUpdate = int(input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green")))
+                                    loopIntCheck = False
+                                    os.system('cls')
+                                except ValueError:
+                                    print(colored("Invalid value!","red")) 
+                                    time.sleep(1.1)
+                                    os.system('cls')
+
+                            print()
+                            print(colored("Insert the new email : ","green"))
+                            print()
+
+                            updateEmail = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                            
+                            crdManager.updateEmail(usrManager.getId(username,password) , idToUpdate , updateEmail)
+                            time.sleep(4.2)
+
+                        elif managerMenu == "6":
+                            os.system('cls')
+
+
+                            loopIntCheck = True
+                            while loopIntCheck:
+                                try:
+                                    print(colored("Insert the credential id : ","green"))
+                                    print()
+                                    idToUpdate = int(input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green")))
+                                    loopIntCheck = False
+                                    os.system('cls')
+                                except ValueError:
+                                    print(colored("Invalid value!","red")) 
+                                    time.sleep(1.1)
+                                    os.system('cls')
+
+                            print()
+                            print(colored("Insert the new email : ","green"))
+                            print()
+
+                            updateUsername = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                            
+                            crdManager.updateEmail(usrManager.getId(username,password) , idToUpdate , updateUsername)
+                            time.sleep(4.2)
+
+                        elif managerMenu == "5":
+                            loopManagerMenuCredentials = False
+                            counterAlert=+1
+                            os.system('cls')
+
+                        elif not(managerMenu == "1" or managerMenu == "2" or managerMenu == "3" or managerMenu == "4" or managerMenu == "5"):
+                            os.system('cls')
+
+                            print(Style.BRIGHT+colored("Invalid Choice","red"))
+                            time.sleep(1.1)
+                            os.system('cls')
+
+
+                elif selectionUser == "6":
                     #QUIT SELECTION
                     loopUser = False
 

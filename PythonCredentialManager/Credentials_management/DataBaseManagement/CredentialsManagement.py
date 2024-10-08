@@ -1,7 +1,10 @@
 import mysql.connector
+import time
 from termcolor import colored
 from colorama import Style ,Fore
 from prettytable import PrettyTable
+
+
 class CredentialManager:
     
     def conncet_db(self):
@@ -27,7 +30,8 @@ class CredentialManager:
 
         db.commit()
 
-        print("Registartion complete!") 
+        print("Registartion complete!")
+        time.sleep(3.2) 
 
     def noFilterSearch(self , id_user_credentials):
         prettytab = PrettyTable()
@@ -51,7 +55,7 @@ class CredentialManager:
 
            print(prettytab,Fore.GREEN)
         else:
-            print("FATAL ERROR : no user was found!")
+            print(colored("no credentials found!" ,"red"))
 
 
     def idFilterSearch(self , id_user_credentials , id_credential):
@@ -78,7 +82,7 @@ class CredentialManager:
 
             print(prettytab , Fore.GREEN)
         else:
-            print(colored("no credentials was found for this id!" , "light_red"))
+            print(colored("no credentials found for this id!" , "light_red"))
         
 
     def usernameFilterSearch(self ,id_user_credentials , username):
@@ -104,7 +108,7 @@ class CredentialManager:
 
             print(prettyTable , Fore.GREEN)
         else: 
-            print(colored("no credentials was found for this username!","red"))
+            print(colored("no credentials found for this username!","red"))
     
     def emailFilterSearch(self, id_credentials_user , email):
         prettyTable = PrettyTable()
@@ -127,7 +131,7 @@ class CredentialManager:
 
             print(prettyTable , Fore.GREEN)  
         else:
-            print(colored("no credentials was found for this email!","red"))
+            print(colored("no credentials found for this email!","red"))
 
     def productFilterSeacrh(self , id_user_credentials , product):
         prettyTable = PrettyTable()
@@ -152,10 +156,67 @@ class CredentialManager:
         else:
             print(colored("no credentials was found for this service!" , "red"))
 
+
     def deleteRow(self , id_user_credentials , id_credential):
         
         db = self.conncet_db()
         cursor = db.cursor()
 
-        sql_query = "ALTER"
+        sql_query = "DELETE FROM credentials WHERE id_user_credentials = %s AND id_credential = %s"
+        cursor.execute(sql_query , (id_user_credentials , id_credential))
+
+        credential = cursor.fetchone()
+
+        db.commit()
+
+        if credential:
+            print(colored("Credential correctly deleted!","green"))
+            time.sleep(4.1)
+        else:
+            print(colored("no credentials found for this id!","red"))
+    
+
+    def updatePassword(self, id_user_credentials , id_credential , updatePassword):
         
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE credentials SET pwd = %s WHERE id_user_credentials = %s AND id_credential = %s"
+        cursor.execute(sql_query , (updatePassword , id_user_credentials , id_credential))
+
+        db.commit()
+
+        if cursor.rowcount>0: #controll on id user
+            print(colored("Password was correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    def updateEmail(self, id_user_credentials , id_credential , updateEmail):
+
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE credentials SET email = %s WHERE id_user_credentials = %s AND id_credential = %s"
+        cursor.execute(sql_query , (updateEmail , id_user_credentials , id_credential))
+
+        db.commit()
+
+        if cursor.rowcount>0: #controll on id user
+            print(colored("Email was correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    def updateUsername(self, id_user_credentials , id_credential , updateUsername):
+
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE credentials SET username = %s WHERE id_user_credentials = %s AND id_credential = %s"
+        cursor.execute(sql_query (updateUsername , id_user_credentials , id_credential))
+
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Username was correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
