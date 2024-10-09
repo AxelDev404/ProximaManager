@@ -72,7 +72,9 @@ class MenuManagement:
         print(colored("|                                    |","red"))
         print(colored("| ","red")+Style.BRIGHT+colored(" [4] [ Modify username ]         ","green")+colored("  |","red"))
         print(colored("|                                    |","red"))
-        print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Quit ]                    ","green")+colored("  |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Modify product ]          ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [6] [ Quit ]                    ","green")+colored("  |","red"))
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
 
 

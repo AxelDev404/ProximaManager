@@ -490,13 +490,47 @@ def main():
                                     crdManager.updateUsername(usrManager.getId(username,password) , idToUpdate , updateUsername)
                                     time.sleep(4.2)
                                     loopUsernameToUpdate = False
-
+                        
                         elif managerMenu == "5":
+                            os.system('cls')
+
+                            loopIntCheck = True
+                            while loopIntCheck:
+                                try:
+                                    print(colored("Insert the credential id : ","green"))
+                                    print()
+                                    idToUpdate = int(input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green")))
+                                    loopIntCheck = False
+                                    os.system('cls')
+                                except ValueError:
+                                    print(colored("Invalid value!","red")) 
+                                    time.sleep(1.1)
+                                    os.system('cls')
+
+                            loopProductToUpdate = True
+                            while loopProductToUpdate:
+                                print()
+                                print(colored("Insert the new product : ","green"))
+                                print()
+
+                                updateProduct = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system('cls')
+                                if updateProduct == "" or len(updateProduct) > 200:
+                                    print(colored("[ Product can't be empty ]" , "red"))
+                                    time.sleep(4.3)
+                                    os.system('cls')
+                                else:
+                                    os.system('cls')
+                                    crdManager.updateProduct(usrManager.getId(username,password) , idToUpdate , updateProduct)
+                                    time.sleep(4.2)
+                                    loopProductToUpdate = False
+
+                        elif managerMenu == "6":
                             loopManagerMenuCredentials = False
                             counterAlert=+1
                             os.system('cls')
 
-                        elif not(managerMenu == "1" or managerMenu == "2" or managerMenu == "3" or managerMenu == "4" or managerMenu == "5"):
+                        elif not(managerMenu == "1" or managerMenu == "2" or managerMenu == "3" or managerMenu == "4" or managerMenu == "5" or managerMenu == "6"):
                             os.system('cls')
 
                             print(Style.BRIGHT+colored("Invalid Choice","red"))

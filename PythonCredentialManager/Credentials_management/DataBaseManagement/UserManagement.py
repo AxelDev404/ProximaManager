@@ -11,9 +11,10 @@ class UserManager:
     def connect_db(self):
         return mysql.connector.connect(
            host= "localhost",
-           user= "rootALEX",
-           password = "root2234A03",
-           database = "credentials_management")
+           user= "username",
+           password = "password",
+           database = "credentials_management",
+        )
        
 
     def logIn(self, username,password):

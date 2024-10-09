@@ -10,9 +10,9 @@ class CredentialManager:
     def conncet_db(self):
         return mysql.connector.connect(
             host = "localhost",
-            user = "rootALEX",
-            password = "root2234A03",
-            database = "credentials_management"
+            user = "username",
+            password = "password",
+            database = "credentials_management",
         )
     
 
@@ -222,6 +222,20 @@ class CredentialManager:
 
         if cursor.rowcount > 0:
             print(colored("Username was correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    def updateProduct(self , id_user_credentials, id_credential , updateProduct): #DECIDE TO USE
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE credentials SET product = %s WHERE id_user_credentials = %s AND id_credential = %s"
+        cursor.execute(sql_query , (updateProduct , id_user_credentials , id_credential))
+
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Product was correctly updated!","green"))
         else:
             print(colored("invald to update for this id because it dosen't exist!" , "red"))
 
