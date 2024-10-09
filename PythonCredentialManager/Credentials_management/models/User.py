@@ -7,7 +7,7 @@ class User:
      else:
         self.__username = username
      
-     if len(password)<8 or password == "":
+     if len(password) <8 or password == "":
         print("[ Password can't be empty and it must be more or equal to 8 characters ]")
      else:
         self.__password = password
@@ -22,7 +22,7 @@ class User:
      else:
         self.__email = email
 
-     if len(numberphone) < 10:
+     if len(numberphone) < 10 or len(numberphone) > 10:
          print("[ Number phone must be more or equal to 10 numbers ]")
      else:
         self.__numberphone = numberphone
@@ -74,7 +74,7 @@ class User:
 
    @numberphone.setter
    def numberphone(self, numberphone):
-     if len(numberphone)<12:
+     if len(numberphone) < 10 or len(numberphone) > 10:
          print("[ Invalid phone number ]")
      else:
          self.__numberphone = numberphone

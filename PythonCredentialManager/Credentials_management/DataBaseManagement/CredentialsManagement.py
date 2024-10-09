@@ -110,6 +110,7 @@ class CredentialManager:
         else: 
             print(colored("no credentials found for this username!","red"))
     
+
     def emailFilterSearch(self, id_credentials_user , email):
         prettyTable = PrettyTable()
 
@@ -132,6 +133,7 @@ class CredentialManager:
             print(prettyTable , Fore.GREEN)  
         else:
             print(colored("no credentials found for this email!","red"))
+
 
     def productFilterSeacrh(self , id_user_credentials , product):
         prettyTable = PrettyTable()
@@ -191,6 +193,7 @@ class CredentialManager:
         else:
             print(colored("invald to update for this id because it dosen't exist!" , "red"))
 
+
     def updateEmail(self, id_user_credentials , id_credential , updateEmail):
 
         db = self.conncet_db()
@@ -206,13 +209,14 @@ class CredentialManager:
         else:
             print(colored("invald to update for this id because it dosen't exist!" , "red"))
 
+
     def updateUsername(self, id_user_credentials , id_credential , updateUsername):
 
         db = self.conncet_db()
         cursor = db.cursor()
 
         sql_query = "UPDATE credentials SET username = %s WHERE id_user_credentials = %s AND id_credential = %s"
-        cursor.execute(sql_query (updateUsername , id_user_credentials , id_credential))
+        cursor.execute(sql_query , (updateUsername , id_user_credentials , id_credential))
 
         db.commit()
 
@@ -220,3 +224,20 @@ class CredentialManager:
             print(colored("Username was correctly updated!","green"))
         else:
             print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    
+    def deleteAllWithUser(self , id_user_credentials):
+        db = self.conncet_db()
+        cursor = db.cursor()
+
+        sql_query = "DELETE FROM credentials WHERE id_user_credentials = %s"
+        cursor.execute(sql_query , (id_user_credentials,))
+
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("All credentials was deleted from database","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    

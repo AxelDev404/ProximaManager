@@ -1,6 +1,7 @@
 
 from termcolor import colored
 from colorama import Style ,Fore
+import pyfiglet
 import pwinput 
 import os
 import time
@@ -17,13 +18,12 @@ def main():
     usrManager = UserManager()
     crdManager = CredentialManager()
 
+    
     menuManagement = MenuManagement()
     register = Register()
 
-    loop = True
-
     #PROXIMA SECURITY MANAGER TITOLO PROGETTO
-
+    loop = True
     while loop:
         os.system('cls')
         menuManagement.exportMenuPrincipal()
@@ -72,11 +72,104 @@ def main():
                                                                                                   
                     os.system('cls')
 
-                    usrManager.profile(username,password)
-                    enter = input("Press enter to quit :")
+                    loopUserManager = True
 
-                    counterAlert+=1
-                    os.system('cls')
+                    while loopUserManager:
+                        print()
+                        menuManagement.exportManagerMenuUser()
+                        userManagerMenu = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+
+                        if userManagerMenu == "1":
+                            os.system('cls')
+                            crdManager.deleteAllWithUser(usrManager.getId(username , password))
+                            usrManager.deleteUser(usrManager.getId(username,password))
+                            time.sleep(4.1)
+
+                        elif userManagerMenu == "2":
+                            os.system('cls')
+
+                            loopNewPassword = True
+                            while loopNewPassword:
+
+                                print(colored("Insert the new password : ","green"))
+                                print()
+
+                                logInNewPasword = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system('cls')
+                                if len(logInNewPasword) < 8 or len(logInNewPasword) > 50:
+                                    print(colored("[ Password can't be empty and it must be more or equal to 8 characters ]","red"))
+                                    time.sleep(4.3)
+                                    os.system("cls")
+                                else:
+                                    os.system('cls')
+                                    usrManager.updatePassword(usrManager.getId(username , password) , logInNewPasword)
+                                    time.sleep(4.1)
+                                    os.system('cls')
+                                    loopNewPassword = False
+
+                        elif userManagerMenu == "3":
+                            os.system('cls')
+
+                            loopNewEmail = True
+                            while loopNewEmail:
+
+                                print(colored("Insert the new email : ","green"))
+                                print()
+
+                                logInNewEmail = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system('cls')
+                                if logInNewEmail == "" or len(logInNewEmail) > 200:
+                                    print(colored("[ Email can,t be empty ]", "red"))
+                                    time.sleep(4.3)
+                                    os.system("cls")
+                                else:
+                                    os.system('cls')
+                                    usrManager.updateEmail(usrManager.getId(username , password) , logInNewEmail)
+                                    time.sleep(4.1)
+                                    os.system('cls')
+                                    loopNewEmail = False
+
+                        elif userManagerMenu == "4": 
+                            os.system('cls')
+                            
+                            loopNewUsername = True
+                            while loopNewUsername:
+
+                                print(colored("Insert the new username : ","green"))
+                                print()
+
+                                logInNewUsername = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system("cls")
+                                if logInNewUsername == "" or len(logInNewUsername) > 50:
+                                    print(colored("[ Username can,t be empty ]", "red"))
+                                    time.sleep(4.3)
+                                    os.system("cls")
+                                else:     
+                                    os.system('cls')
+                                    usrManager.updateUsername(usrManager.getId(username , password) , logInNewUsername)
+                                    time.sleep(4.1)
+                                    os.system('cls')
+                                    loopNewUsername = False
+                        
+                        elif userManagerMenu == "5":
+                            os.system('cls')
+                            usrManager.profile(username,password)
+                            print(colored("Press eneter to quit" , "green"))
+                            print()
+                            enter = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                            os.system('cls')
+
+                        elif userManagerMenu == "6":
+                            loopUserManager = False
+                            counterAlert+=1
+                            os.system('cls')
+                        
+                        elif not(userManagerMenu == "1" or userManagerMenu == "2" or userManagerMenu == "3" or userManagerMenu == "4" or userManagerMenu == "5" or userManagerMenu == "6"):
+                            os.system('cls')
+                            print(Style.BRIGHT+colored("Invalid Choice","red"))
+                            time.sleep(1.1)
+                            os.system('cls')
+
 
                 elif selectionUser == "2":
                     #  ____                    ____              _            _   _       _     
@@ -305,14 +398,26 @@ def main():
                                     time.sleep(1.1)
                                     os.system('cls')
 
-                            print()
-                            print(colored("Insert the new password : ","green"))
-                            print()
 
-                            updatePassword = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
-                            
-                            crdManager.updatePassword(usrManager.getId(username,password) , idToUpdate , updatePassword)
-                            time.sleep(4.2)
+                            loopPasswordToUpdate = True
+
+                            while loopPasswordToUpdate:
+                                print()
+                                print(colored("Insert the new password : ","green"))
+                                print()
+
+                                updatePassword = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system("cls")
+
+                                if updatePassword == "" or len(updatePassword) > 50:
+                                    print(colored("[ Password can't be empty ]" , "red"))
+                                    time.sleep(4.3)
+                                    os.system('cls')
+                                else: 
+                                    os.system('cls')
+                                    crdManager.updatePassword(usrManager.getId(username,password) , idToUpdate , updatePassword)
+                                    time.sleep(4.2)
+                                    loopPasswordToUpdate = False
                         
                         elif managerMenu == "3":
                             os.system('cls')
@@ -330,16 +435,27 @@ def main():
                                     time.sleep(1.1)
                                     os.system('cls')
 
-                            print()
-                            print(colored("Insert the new email : ","green"))
-                            print()
+                            loopEmailToUpdate = True
 
-                            updateEmail = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
-                            
-                            crdManager.updateEmail(usrManager.getId(username,password) , idToUpdate , updateEmail)
-                            time.sleep(4.2)
+                            while loopEmailToUpdate:
+                                print()
+                                print(colored("Insert the new email : ","green"))
+                                print()
 
-                        elif managerMenu == "6":
+                                updateEmail = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system('cls')
+
+                                if updateEmail == "" or len(updateEmail) > 200:
+                                    print(colored("[ Eamil can't be empty ]" , "red"))
+                                    time.sleep(4.3)
+                                    os.system('cls')
+                                else:
+                                    os.system('cls')
+                                    crdManager.updateEmail(usrManager.getId(username,password) , idToUpdate , updateEmail)
+                                    time.sleep(4.2)
+                                    loopEmailToUpdate = False
+
+                        elif managerMenu == "4":
                             os.system('cls')
 
 
@@ -356,14 +472,24 @@ def main():
                                     time.sleep(1.1)
                                     os.system('cls')
 
-                            print()
-                            print(colored("Insert the new email : ","green"))
-                            print()
 
-                            updateUsername = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
-                            
-                            crdManager.updateEmail(usrManager.getId(username,password) , idToUpdate , updateUsername)
-                            time.sleep(4.2)
+                            loopUsernameToUpdate = True
+                            while loopUsernameToUpdate:
+                                print()
+                                print(colored("Insert the new username : ","green"))
+                                print()
+
+                                updateUsername = input(Style.BRIGHT+colored(usrManager.getUsername(username , password),"green")+Style.BRIGHT+colored("@","red")+Style.BRIGHT+colored(">_ ","green"))
+                                os.system('cls')
+                                if updateUsername == "" or len(updateUsername) > 50:
+                                    print(colored("[ Username can't be empty ]" , "red"))
+                                    time.sleep(4.3)
+                                    os.system('cls')
+                                else:
+                                    os.system('cls')
+                                    crdManager.updateUsername(usrManager.getId(username,password) , idToUpdate , updateUsername)
+                                    time.sleep(4.2)
+                                    loopUsernameToUpdate = False
 
                         elif managerMenu == "5":
                             loopManagerMenuCredentials = False
@@ -434,3 +560,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+    enter = input("enter to Close")

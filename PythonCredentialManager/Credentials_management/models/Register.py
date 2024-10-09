@@ -19,7 +19,7 @@ class Register:
 
             usrName = input(colored("Username : " , "green"))
             os.system("cls")
-            if usrName == "":
+            if usrName == "" or len(usrName)> 50:
                 print(colored("[ Username can't be empty]" , "red"))
                 time.sleep(4.3)
                 os.system("cls")
@@ -34,8 +34,8 @@ class Register:
             pwd = input(colored("Password : " , "green"))
             os.system("cls")
 
-            if len(pwd) < 8:
-                print(colored("[ Password can't be empty and it must be more or equal to 8 characters ]","red"))
+            if len(pwd) < 8 or len(pwd)> 50 :
+                print(colored("[ Password can't be empty and it must be more or equal to 8 characters and can't have blank space ]","red"))
                 time.sleep(5.3)
                 os.system("cls")
             else:
@@ -63,7 +63,7 @@ class Register:
 
             email = input(colored("Eamil : " , "green"))
             os.system("cls")
-            if email == "":
+            if email == "" or len(email) > 200:
                 print(colored("[ Email can,t be empty ]", "red"))
                 time.sleep(4.3)
                 os.system("cls")
@@ -77,7 +77,7 @@ class Register:
                 
             numberPhone = input(colored("Phone : " , "green"))
             os.system("cls")
-            if len(numberPhone) < 10 : 
+            if len(numberPhone) < 10 or len(numberPhone) > 10 : 
                 print(colored("[ Invalid number phone ]", "red"))
                 time.sleep(4.3)
                 os.system("cls")
@@ -103,9 +103,9 @@ class Register:
             email = input(colored("Email : " , "green"))
             os.system('cls')
 
-            if email == "":
+            if email == "" or len(email > 200):
                 print(colored("[ Email can,t be empty ]", "red"))
-                time.sleep(1.3)
+                time.sleep(4.3)
                 os.system("cls")
             else:
                 loop = False
@@ -117,7 +117,7 @@ class Register:
             username = input(colored("Username : " , "green"))
             os.system('cls')
 
-            if username == "":
+            if username == "" or len(username > 50):
                 print(Style.BRIGHT+colored("[ ADVISE (Empty Value) : Username can be added leater in < Settings-credentials > ]" , "yellow"))
                 time.sleep(3.3)
                 os.system("cls")
@@ -130,9 +130,9 @@ class Register:
             password = input(colored("Password : " , "green"))
             os.system('cls')
 
-            if password == "":
+            if password == "" or len(password > 50):
                 print(colored("[ Password can't be empty ]" , "red"))
-                time.sleep(1.1)
+                time.sleep(4.1)
                 os.system("cls")
             else:
                 loop = False
@@ -144,9 +144,9 @@ class Register:
             product = input(colored("Service : " , "green"))
             os.system('cls')
 
-            if product == "":
+            if product == "" or len(product > 200):
                 print(colored("[ Product can't be empty ]" , "red"))
-                time.sleep(1.1)
+                time.sleep(4.1)
                 os.system("cls")
             else:
                 loop = False

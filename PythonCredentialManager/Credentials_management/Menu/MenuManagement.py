@@ -19,6 +19,7 @@ class MenuManagement:
         print()
 
     def exportUserMenu(self):
+
         print(colored("+","green")+colored("__________________________________","red")+colored("+","green"))
         print(colored("|                                 |","red"))
         print(colored("|     ","red")+Style.BRIGHT+colored(" <     MAIN MENU     >" , "red")+colored("      |","red"))
@@ -39,6 +40,7 @@ class MenuManagement:
         print()
 
     def exportSerchMenu(self):
+
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         print(colored("|                                    |","red"))
         print(colored("|         ","red")+Style.BRIGHT+colored("< FILTER SEARCH >" , "red")+colored("          |","red"))
@@ -56,6 +58,7 @@ class MenuManagement:
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
 
     def exportManagerMenuCredentials(self):
+
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
         print(colored("|                                    |","red"))
         print(colored("|           ","red")+Style.BRIGHT+colored("< MANAGE MENU >" , "red")+colored("          |","red"))
@@ -71,4 +74,28 @@ class MenuManagement:
         print(colored("|                                    |","red"))
         print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Quit ]                    ","green")+colored("  |","red"))
         print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
+
+
+    def exportManagerMenuUser(self):
+        
+        print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
+        print(colored("|                                    |","red"))
+        print(colored("|           ","red")+Style.BRIGHT+colored("< MANAGE MENU >" , "red")+colored("          |","red"))
+        print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [1] [ Delete profile ]          ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [2] [ Modify password ]         ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [3] [ Modify email ]            ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [4] [ Modify username ]         ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [5] [ Profile ]                 ","green")+colored("  |","red"))
+        print(colored("|                                    |","red"))
+        print(colored("| ","red")+Style.BRIGHT+colored(" [6] [ Quit ]                    ","green")+colored("  |","red"))
+        print(colored("+","green")+colored("____________________________________","red")+colored("+","green"))
+
+        print()
+        print("")
         

@@ -38,7 +38,7 @@ class UserManager:
            os.system('cls')
 
            return False
-       
+    
     
     def profile(self, username,password):
        prettyTable = PrettyTable()
@@ -46,7 +46,7 @@ class UserManager:
        db = self.connect_db()
        cursor = db.cursor()
 
-       sql_query = 'SELECT id_user , nome , username , email , number_phone  FROM user WHERE username = %s AND pwd = %s'
+       sql_query = 'SELECT id_user , nome , username, pwd , email , number_phone  FROM user WHERE username = %s AND pwd = %s'
        cursor.execute(sql_query,(username,password))
        
        usr = cursor.fetchall()
@@ -141,5 +141,62 @@ class UserManager:
             return id_user
         else:
             print("FATAL ERROR : No user was found")
+
+    def updateUsername(self , id_user , logInNewUsername):
+        db = self.connect_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE user SET username = %s WHERE id_user = %s"
+        cursor.execute(sql_query , (logInNewUsername , id_user))
         
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Username correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    def updatePassword(self, id_user , logInNewPassword):
+        db = self.connect_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE user SET pwd = %s WHERE id_user = %s"
+        cursor.execute(sql_query , (logInNewPassword , id_user))
+        
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Passsword correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+    def updateEmail(self , id_user , logInNewEmail):
+        db = self.connect_db()
+        cursor = db.cursor()
+
+        sql_query = "UPDATE user SET email = %s WHERE id_user = %s"
+        cursor.execute(sql_query , (logInNewEmail , id_user))
+
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Email correctly updated!","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
+
+    def deleteUser(self , id_user):
+        db = self.connect_db()
+        cursor = db.cursor()
+
+        sql_query = "DELETE FROM user WHERE id_user = %s"
+        cursor.execute(sql_query , (id_user,))
+
+        db.commit()
+
+        if cursor.rowcount > 0:
+            print(colored("Accout deleted","green"))
+        else:
+            print(colored("invald to update for this id because it dosen't exist!" , "red"))
+
     
