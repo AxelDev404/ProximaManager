@@ -1,3 +1,4 @@
 
                                                                                                            
-![terminalProxima](https://github.com/user-attachments/assets/b574dc1d-f606-4396-80a6-6235bae41167)
+
+![proxTerminal](https://github.com/user-attachments/assets/65f81dcb-9cb9-449f-b3b9-39079147b643)
